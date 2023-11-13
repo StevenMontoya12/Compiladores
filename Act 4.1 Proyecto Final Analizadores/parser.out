@@ -1,0 +1,144 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    CADENA
+    DOT
+    EQUALS
+    FOR
+    INT
+    LEQ
+    NUM
+    PLUS
+
+Grammar
+
+Rule 0     S' -> hola_loop
+Rule 1     hola_loop -> FN ID LPAREN RPAREN LBRACE PRINTLN ADMIRATION LPAREN STRING RPAREN SEMICOLON RBRACE
+
+Terminals, with rules where they appear
+
+ADMIRATION           : 1
+CADENA               : 
+DOT                  : 
+EQUALS               : 
+FN                   : 1
+FOR                  : 
+ID                   : 1
+INT                  : 
+LBRACE               : 1
+LEQ                  : 
+LPAREN               : 1 1
+NUM                  : 
+PLUS                 : 
+PRINTLN              : 1
+RBRACE               : 1
+RPAREN               : 1 1
+SEMICOLON            : 1
+STRING               : 1
+error                : 
+
+Nonterminals, with rules where they appear
+
+hola_loop            : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . hola_loop
+    (1) hola_loop -> . FN ID LPAREN RPAREN LBRACE PRINTLN ADMIRATION LPAREN STRING RPAREN SEMICOLON RBRACE
+
+    FN              shift and go to state 2
+
+    hola_loop                      shift and go to state 1
+
+state 1
+
+    (0) S' -> hola_loop .
+
+
+
+state 2
+
+    (1) hola_loop -> FN . ID LPAREN RPAREN LBRACE PRINTLN ADMIRATION LPAREN STRING RPAREN SEMICOLON RBRACE
+
+    ID              shift and go to state 3
+
+
+state 3
+
+    (1) hola_loop -> FN ID . LPAREN RPAREN LBRACE PRINTLN ADMIRATION LPAREN STRING RPAREN SEMICOLON RBRACE
+
+    LPAREN          shift and go to state 4
+
+
+state 4
+
+    (1) hola_loop -> FN ID LPAREN . RPAREN LBRACE PRINTLN ADMIRATION LPAREN STRING RPAREN SEMICOLON RBRACE
+
+    RPAREN          shift and go to state 5
+
+
+state 5
+
+    (1) hola_loop -> FN ID LPAREN RPAREN . LBRACE PRINTLN ADMIRATION LPAREN STRING RPAREN SEMICOLON RBRACE
+
+    LBRACE          shift and go to state 6
+
+
+state 6
+
+    (1) hola_loop -> FN ID LPAREN RPAREN LBRACE . PRINTLN ADMIRATION LPAREN STRING RPAREN SEMICOLON RBRACE
+
+    PRINTLN         shift and go to state 7
+
+
+state 7
+
+    (1) hola_loop -> FN ID LPAREN RPAREN LBRACE PRINTLN . ADMIRATION LPAREN STRING RPAREN SEMICOLON RBRACE
+
+    ADMIRATION      shift and go to state 8
+
+
+state 8
+
+    (1) hola_loop -> FN ID LPAREN RPAREN LBRACE PRINTLN ADMIRATION . LPAREN STRING RPAREN SEMICOLON RBRACE
+
+    LPAREN          shift and go to state 9
+
+
+state 9
+
+    (1) hola_loop -> FN ID LPAREN RPAREN LBRACE PRINTLN ADMIRATION LPAREN . STRING RPAREN SEMICOLON RBRACE
+
+    STRING          shift and go to state 10
+
+
+state 10
+
+    (1) hola_loop -> FN ID LPAREN RPAREN LBRACE PRINTLN ADMIRATION LPAREN STRING . RPAREN SEMICOLON RBRACE
+
+    RPAREN          shift and go to state 11
+
+
+state 11
+
+    (1) hola_loop -> FN ID LPAREN RPAREN LBRACE PRINTLN ADMIRATION LPAREN STRING RPAREN . SEMICOLON RBRACE
+
+    SEMICOLON       shift and go to state 12
+
+
+state 12
+
+    (1) hola_loop -> FN ID LPAREN RPAREN LBRACE PRINTLN ADMIRATION LPAREN STRING RPAREN SEMICOLON . RBRACE
+
+    RBRACE          shift and go to state 13
+
+
+state 13
+
+    (1) hola_loop -> FN ID LPAREN RPAREN LBRACE PRINTLN ADMIRATION LPAREN STRING RPAREN SEMICOLON RBRACE .
+
+    $end            reduce using rule 1 (hola_loop -> FN ID LPAREN RPAREN LBRACE PRINTLN ADMIRATION LPAREN STRING RPAREN SEMICOLON RBRACE .)
+

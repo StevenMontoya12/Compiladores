@@ -4,7 +4,7 @@ from tkinter import ttk
 
 class Lexer:
     def __init__(self):
-        self.reservada_keywords = ['if', 'else', 'while', 'for', 'int', 'float', 'import', 'package', 'func', 'fn', 'println!']
+        self.reservada_keywords = ['if', 'else', 'while', 'for', 'int', 'float', 'main', 'import', 'package', 'func', 'fn', 'println']
         self.Simboloss = ['+', '-', '*', '/', '=', '==', '!=', '<', '>', '<=', '>=', '(', ')', '{', '}', ';', ',', '"', "'","!"]
 
         self.token_patterns = [
@@ -78,7 +78,7 @@ class LexerApp:
 
          # Configura la alineación y el ancho de las columnas
         columns = ("Linea", "Token", "Funcion", "Reservada", "Cadena", "Identificador", "Símbolo", "Numero")
-        column_widths = (70, 100, 95, 100, 70, 90, 70, 80)  # Define los anchos deseados
+        column_widths = (70, 100, 80, 100, 70, 90, 70, 80)  # Define los anchos deseados
 
         for column, width in zip(columns, column_widths):
             self.tree.column(column, anchor="center", width=width)

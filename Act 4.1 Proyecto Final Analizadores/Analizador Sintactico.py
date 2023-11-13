@@ -20,6 +20,10 @@ tokens = (
     'DOT',
     'EQUALS',
     'LEQ',
+    'FN',
+    'PRINTLN',
+    'CADENA',
+    'ADMIRATION',
      
 )
 t_PLUS = r'\+'
@@ -31,12 +35,16 @@ t_RBRACE = r'}'
 t_DOT = r'\.'
 t_EQUALS = r'='
 t_LEQ = r'<=' 
+t_ADMIRATION = r'!'
+
 
 
 def t_STRING(t):
-    r'\".*?\"'
-    t.value = t.value[1:-1] 
+    r'\"[^\"]*\"'
+    t.value = t.value[1:-1]
     return t
+
+
 
 def t_ID(t):
     r'[a-zA-Z][a-zA-Z0-9]*'
@@ -44,6 +52,10 @@ def t_ID(t):
         t.type = 'FOR'
     elif t.value == 'int':
         t.type = 'INT'
+    elif t.value == 'fn':
+        t.type = "FN"
+    elif t.value == 'println':
+        t.type = 'PRINTLN'
     return t
 # Regla para identificar números
 def t_NUM(t):
@@ -62,8 +74,9 @@ def t_error(t):
 lexer = lex.lex()
 
 # Definición de la gramática para el análisis sintáctico
-def p_for_loop(p):
-    '''for_loop : FOR LPAREN INT ID EQUALS NUM SEMICOLON ID LEQ NUM SEMICOLON ID PLUS PLUS RPAREN LBRACE ID DOT ID DOT ID LPAREN ID PLUS NUM RPAREN  SEMICOLON RBRACE'''
+def p_hola_loop(p):
+    '''hola_loop : FN ID LPAREN RPAREN LBRACE PRINTLN ADMIRATION LPAREN  STRING RPAREN SEMICOLON RBRACE'''
+    # FOR LPAREN INT ID EQUALS NUM SEMICOLON ID LEQ NUM SEMICOLON ID PLUS PLUS RPAREN LBRACE ID DOT ID DOT ID LPAREN ID PLUS NUM RPAREN  SEMICOLON RBRACE'''
     pass
 
 # Manejo de errores de sintaxis
