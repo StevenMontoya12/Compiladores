@@ -1,6 +1,7 @@
 #Importando Librerias
 import re
 import tkinter as tk
+from subprocess import call
 from tkinter import messagebox
 from ply import lex, yacc
 
@@ -82,9 +83,9 @@ def p_hola_loop(p):
 # Manejo de errores de sintaxis
 def p_error(p):
     if p:
-        error_message(f"Error de sintaxis en '{p.value}'", p.lineno)
+        error_message(f"Syntax error in '{p.value}'", p.lineno)
     else:
-        error_message("Error de sintaxis: final inesperado del código", len(code_text.get("1.0", "end-1c").split('\n')))
+        error_message("Syntax error: unexpected end of code", len(code_text.get("1.0", "end-1c").split('\n')))
 
 # Construcción del parser
 parser = yacc.yacc()
@@ -105,7 +106,7 @@ def parse_code(code):
     parser.parse(code, lexer=lexer)
 
 def error_message(message, line_number):
-    messagebox.showerror("Error de sintaxis", f"{message}\nEn la línea {line_number}")
+    messagebox.showerror("Syntax Error", f"{message}\nOn the line {line_number}")
 
 # Función para procesar el código ingresado
 def process_code():
@@ -117,26 +118,50 @@ def process_code():
         result_text.insert("end", f"Línea ->: {token_type} -> {token_value}\n")
     parse_code(code)
 
+def clear_text():
+    code_text.delete("1.0", "end")
+    result_text.delete("1.0", "end")
+
+def exit_app():
+    window.destroy()
+
+def lexico():
+    window.destroy()
+    call(["python", "Lexico.py"])
 
 # Creación de la ventana de la interfaz gráfica
 window = tk.Tk()
-window.title("Lexer")
-window.geometry("600x400")
+window.title("Lexical Analyzer")
+window.geometry("700x480")
+window.configure(bg="#DCDCDC")
 
 # Etiqueta y campo de texto para ingresar el código
-code_label = tk.Label(window, text="Ingrese el código:")
-code_label.pack()
+code_label = tk.Label(window, text="Enter code:", fg="white", bg="#87CEEB", font=("Ubuntu", 14))
+code_label.pack(pady=(15, 0))
 
 code_text = tk.Text(window, height=10, width=50)
 code_text.pack()
 
-# Botón para procesar el código
-process_button = tk.Button(window, text="Procesar", command=process_code)
-process_button.pack()
+process_frame = tk.Frame(window)
+process_frame.pack()
 
-# Etiqueta y campo de texto para mostrar los tokens
-result_label = tk.Label(window, text="Tokens:")
-result_label.pack()
+# Botón para procesar el código
+process_button = tk.Button(process_frame, text="Process", command=process_code, fg="black", bg="#98FB98", font=("Ubuntu", 12))
+process_button.pack(side="left", padx=(5, 5))
+
+# Botón para limpiar el código
+clear_button = tk.Button(process_frame, text="Clear", command=clear_text, fg="black", bg="#FFB6C1", font=("Ubuntu", 12))
+clear_button.pack(side="left", padx=(5, 5))
+
+# Botón para salir de la aplicación
+exit_button = tk.Button(process_frame, text="Exit", command=exit_app, fg="black", bg="#FFA500", font=("Ubuntu", 12))
+exit_button.pack(side="left", padx=(5, 5))
+
+menu_button = tk.Button(process_frame,text='Lexical Analyzer',command=lexico,bg="grey", font=("Ubuntu", 12))
+menu_button.pack(side="left", padx=(5, 5))
+
+result_label = tk.Label(window, text="Tokens:", fg="black", bg="#FFFF99", font=("Ubuntu", 14))
+result_label.pack(pady=(15, 0))
 
 result_text = tk.Text(window, height=10, width=50)
 result_text.pack()

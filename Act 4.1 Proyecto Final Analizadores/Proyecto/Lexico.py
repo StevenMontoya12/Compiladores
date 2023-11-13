@@ -1,6 +1,7 @@
 import re
 import tkinter as tk
 from tkinter import ttk
+from subprocess import call
 
 class Lexer:
     def __init__(self):
@@ -64,6 +65,9 @@ class LexerApp:
         #Crea un boton para salir del programa
         self.exit_button = tk.Button(self.button_frame, text="Exit", command=self.exit_app, bg="#FF6969", font=("Ubuntu", 12))
         self.exit_button.grid(row=0, column=2, padx=30, pady=10)
+        
+        self.menu_button = tk.Button(self.button_frame,text='Syntax Analyzer',command=self.sintactico,bg="grey", font=("Ubuntu", 12))
+        self.menu_button.grid(row=0, column=3, padx=30, pady=10)
 
         self.tree = ttk.Treeview(self.windows, columns=("Linea", "Token", "Funcion", "Reservada", "Cadena", "Identificador", "Símbolo", "Numero"),show="headings")
         self.tree.heading("Linea", text="Line")
@@ -169,6 +173,10 @@ class LexerApp:
         for token_type, count in count_tokens.items():
             self.count_tree.insert("", "end", values=(token_type, count))
 
+
+    def sintactico(self):
+        self.windows.destroy()
+        call(["python", "Sintactico.py"])
 
 
     def clean_text(self):

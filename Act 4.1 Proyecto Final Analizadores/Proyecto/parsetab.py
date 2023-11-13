@@ -27,5 +27,5 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> hola_loop","S'",1,None,None,None),
-  ('hola_loop -> FN ID LPAREN RPAREN LBRACE PRINTLN ADMIRATION LPAREN STRING RPAREN SEMICOLON RBRACE','hola_loop',12,'p_hola_loop','Analizador Sintactico.py',78),
+  ('hola_loop -> FN ID LPAREN RPAREN LBRACE PRINTLN ADMIRATION LPAREN STRING RPAREN SEMICOLON RBRACE','hola_loop',12,'p_hola_loop','Sintactico.py',78),
 ]
