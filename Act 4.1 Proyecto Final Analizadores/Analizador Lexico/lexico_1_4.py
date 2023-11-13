@@ -39,14 +39,14 @@ class Lexer:
 class LexerApp:
     def __init__(self):
         self.windows = tk.Tk() #Crea una ventana de la clase
-        self.windows.title("Analizador léxico") #Establece el titulo de la ventana
+        self.windows.title("Lexical Analyzer") #Establece el titulo de la ventana
 
         #Crea una etiqueta para el titulo de la aplicacion
-        self.text_label = tk.Label(text="----- ANALIZADOR LÉXICO -----", height=2, width=50, font=("Arial", 20, 'bold'), fg="#FFF3DA", bg="#141E46")
+        self.text_label = tk.Label(text="Lexical Analyzer", height=2, width=40, font=("Ubuntu", 20, 'bold'), fg="#FFF3DA", bg="#FFA500")
         self.text_label.pack(pady=5)
 
         #Crea un cuadro de texto para la entrada de texto
-        self.text_input = tk.Text(self.windows, height=8, width=70, font=("Arial", 12))
+        self.text_input = tk.Text(self.windows, height=8, width=70, font=("Ubuntu", 12))
         self.text_input.pack(pady=5)
 
         #Crea un marco para los botones
@@ -54,26 +54,26 @@ class LexerApp:
         self.button_frame.pack()
 
         #crea un boton para realizar el analisis lexico del texto de entrada
-        self.analyze_button = tk.Button(self.button_frame, text="Analizar", command=self.analyze_text, bg="#A8DF8E", font=("Arial", 14, 'bold'))
+        self.analyze_button = tk.Button(self.button_frame, text="Analyze", command=self.analyze_text, bg="#A8DF8E", font=("Ubuntu", 12))
         self.analyze_button.grid(row=0, column=0, padx=30, pady=10)
 
         #crea un boton para limpiar el cuadro de texto
-        self.clean_button = tk.Button(self.button_frame, text="Limpiar", command=self.clean_text, bg="#FFC436", font=("Arial", 14, 'bold'))
+        self.clean_button = tk.Button(self.button_frame, text="Clear", command=self.clean_text, bg="cyan", font=("Ubuntu", 12))
         self.clean_button.grid(row=0, column=1, padx=30, pady=10)
 
         #Crea un boton para salir del programa
-        self.exit_button = tk.Button(self.button_frame, text="Salir", command=self.exit_app, bg="#FF6969", font=("Arial", 14, 'bold'))
+        self.exit_button = tk.Button(self.button_frame, text="Exit", command=self.exit_app, bg="#FF6969", font=("Ubuntu", 12))
         self.exit_button.grid(row=0, column=2, padx=30, pady=10)
 
         self.tree = ttk.Treeview(self.windows, columns=("Linea", "Token", "Funcion", "Reservada", "Cadena", "Identificador", "Símbolo", "Numero"),show="headings")
-        self.tree.heading("Linea", text="Linea")
+        self.tree.heading("Linea", text="Line")
         self.tree.heading("Token", text="Token")
-        self.tree.heading("Funcion", text="Funcion")
-        self.tree.heading("Reservada", text="Reservada")
+        self.tree.heading("Funcion", text="Function")
+        self.tree.heading("Reservada", text="Reserved")
         self.tree.heading("Cadena", text="Cadena")
-        self.tree.heading("Identificador", text="Identificador")
-        self.tree.heading("Símbolo", text="Símbolo")
-        self.tree.heading("Numero", text="Numero")
+        self.tree.heading("Identificador", text="Identifier")
+        self.tree.heading("Símbolo", text="Symbol")
+        self.tree.heading("Numero", text="Number")
         self.tree.pack()
 
          # Configura la alineación y el ancho de las columnas
@@ -83,13 +83,14 @@ class LexerApp:
         for column, width in zip(columns, column_widths):
             self.tree.column(column, anchor="center", width=width)
 
-        self.text_label = tk.Label(text=" ---- Contador de Elementos --- ", height=1, width=50, font=("Arial", 15, 'bold'), fg="#141E46") #bg="#141E46")
-        self.text_label.pack(pady=1)
+        self.text_label = tk.Label(text="Count",height=2, width=35, font=("Ubuntu", 20, 'bold'), fg="white",bg="#A52A2A") 
+        self.text_label.pack(pady=(15, 0)) 
+
 
         self.count_tree = ttk.Treeview(self.windows, columns=("Elemento", "Cantidad"), show="headings")
-        self.count_tree.heading("Elemento", text="Elemento")
-        self.count_tree.heading("Cantidad", text="Cantidad")
-        self.count_tree.pack(pady=10)
+        self.count_tree.heading("Elemento", text="Element")
+        self.count_tree.heading("Cantidad", text="Amount")
+        self.count_tree.pack(pady=1)
         
         columns = ("Elemento", "Cantidad")
         column_widths = (300, 300)  # Define los anchos deseados
