@@ -4,17 +4,19 @@ from tkinter import ttk
 
 class Lexer:
     def __init__(self):
-        self.reservada_keywords = ['if', 'else', 'while', 'for', 'int', 'float', 'main', 'fn', 'println!']
-        self.Simboloss = ['+', '-', '*', '/', '=', '==', '!=', '<', '>', '<=', '>=', '(', ')', '{', '}', ';', ',', '"', "'"]
+        self.reservada_keywords = ['if', 'else', 'while', 'for', 'int', 'float', 'main', 'import', 'package', 'func', 'fn', 'println!']
+        self.Simboloss = ['+', '-', '*', '/', '=', '==', '!=', '<', '>', '<=', '>=', '(', ')', '{', '}', ';', ',', '"', "'","!"]
+
         self.token_patterns = [
             ('Cadena', r'"(?:[^"\\]|\\.)*"'),
             ('VARIABLE', r'\$\w+'),
             ('Numero', r'\d+(\.\d+)?'),
-            ('reservada', '|'.join(r'\b' + re.escape(keyword) + r'(!)?\b' for keyword in self.reservada_keywords)),
+            ('reservada', '|'.join(r'\b' + re.escape(keyword) + r'(?![A-Za-z0-9_])' for keyword in self.reservada_keywords)),
             ('Identificador', r'[A-Za-z_][A-Za-z0-9_]*'),
             ('Simbolos', '|'.join(map(re.escape, self.Simboloss))),
             ('SPACE', r'\s+'),
         ]
+
         self.token_regex = '|'.join(f'(?P<{name}>{pattern})' for name, pattern in self.token_patterns)
         self.token_pattern = re.compile(self.token_regex)
 
@@ -32,6 +34,7 @@ class Lexer:
             else:
                 position += 1
         return tokens
+
 
 class LexerApp:
     def __init__(self):
